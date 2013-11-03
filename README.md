@@ -17,11 +17,16 @@
 
 得到指纹以后，就可以对比不同的图片，看看64位中有多少位是不一样的。在理论上，这等同于计算"汉明距离"（Hamming distance）。如果不相同的数据位不超过5，就说明两张图片很相似；如果大于10，就说明这是两张不同的图片。
 
-示例：
+代码示例：
 
 <?php
+
 require_once "Imghash.class.php";
+
 $instance = ImgHash::getInstance();
+
 echo $instance->run("a.jpg");
+
 echo $instance->checkIsSimilarImg("a.jpg","b.jpg");
+
 ?>
