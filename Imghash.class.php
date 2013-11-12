@@ -8,8 +8,6 @@ class Imghash{
 	
 	private static $_instance = null;
 	
-	public $rate = 1;
-	
 	public static function getInstance(){
 		if (self::$_instance === null){
 			self::$_instance = new self();
@@ -38,14 +36,14 @@ class Imghash{
 		}
 		if (strlen($imgHash) !== strlen($otherImgHash)) return false;
 		$count = levenshtein($imgHash,$otherImgHash);
-		return $count <= (5 * $this->rate * $this->rate) ? true : false;
+		return $count <= 5 ? true : false;
 	}
 	public function hash($file){
 		if ((!file_exists($file))&&(!@fopen( $file, 'r' ))){
 			return false;
 		}
-		$height = 8 * $this->rate;
-		$width = 8 * $this->rate;
+		$height = 8;
+		$width = 8;
 		$img = imagecreatetruecolor($width, $height);
 		list($w, $h, $ext) = getimagesize($file);
 		$source = NULL;
@@ -75,7 +73,7 @@ class Imghash{
 				$total += $gray;
 			}
 		}
-		$average = intval($total / (64 * $this->rate * $this->rate));
+		$average = $average = $total >> 6;
 		$result = '';
 		for ($y=0;$y<$height;$y++){
 			for ($x=0;$x<$width;$x++){
