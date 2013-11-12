@@ -73,7 +73,7 @@ class Imghash{
 				$total += $gray;
 			}
 		}
-		$average = $average = $total >> 6;
+		$average = $total >> 6;
 		$result = '';
 		for ($y=0;$y<$height;$y++){
 			for ($x=0;$x<$width;$x++){
